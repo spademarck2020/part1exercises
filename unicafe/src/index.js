@@ -5,7 +5,24 @@ const Header = (props) => <h1>{props.title}</h1>
 
 const Button = ({handleClick, text}) => <button onClick={handleClick}>{text}</button>
 
-const Statistic = ({text, value}) => <p>{text} {value}</p>
+const Buttons = (props) => {
+  return(
+    <>
+    <Button handleClick = {() =>props.setGood()} text='good' />
+    <Button handleClick = {() =>props.setNeutral()} text='neutral' />
+    <Button handleClick = {() =>props.setBad()} text='bad' />
+    </>
+  )
+}
+
+const Statistic = ({text, value}) => {
+  return(
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
+  )
+}
 
 const Statistics = (props) => {
 
@@ -16,14 +33,16 @@ const Statistics = (props) => {
   }
 
   return(
-  <>
-  <Statistic text='good' value={props.good} />
-  <Statistic text='neutral' value={props.neutral} />
-  <Statistic text='bad' value={props.bad} />
-  <Statistic text='all' value={props.all} />
-  <Statistic text='average' value={props.average} />
-  <Statistic text='positive' value={props.positive} />
-  </>
+  <table>
+    <tbody>
+      <Statistic text='good' value={props.good} />
+      <Statistic text='neutral' value={props.neutral} />
+      <Statistic text='bad' value={props.bad} />
+      <Statistic text='all' value={props.all} />
+      <Statistic text='average' value={props.average} />
+      <Statistic text='positive' value={props.positive} />
+    </tbody>
+  </table>
   )
 }
 
@@ -37,12 +56,16 @@ const App = () =>{
   const average = (good-bad)/all
   const positive = ((good/all)*100) + '%' 
 
+  const getGood = () => setGood(good+1)
+  const getNeutral = () => setNeutral(neutral+1)
+  const getBad = () => setBad(bad+1)
+
   return(
     <div>
       <Header title='give feedback' />
-      <Button handleClick = {() => setGood(good + 1)} text={'good'} />
-      <Button handleClick = {() => setNeutral(neutral + 1)} text={'neutral'} />
-      <Button handleClick = {() => setBad(bad + 1)} text={'bad'} />
+      <Buttons setGood={getGood}
+                setNeutral={getNeutral}
+                setBad={getBad} />
       <Header title='statistics' />
       <Statistics good={good} neutral={neutral} bad={bad}
                   all={all} average={average} positive={positive} /> 

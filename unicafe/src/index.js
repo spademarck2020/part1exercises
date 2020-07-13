@@ -8,6 +8,13 @@ const Button = ({handleClick, text}) => <button onClick={handleClick}>{text}</bu
 const Content = ({text, value}) => <p>{text} {value}</p>
 
 const Statistics = (props) => {
+
+  if(props.all === 0){
+    return(
+      <p>No feedback given</p>
+    )
+  }
+
   return(
   <>
   <Content text={props.textGood} value={props.valueGood} />
@@ -37,7 +44,7 @@ const App = () =>{
       <Button handleClick = {() => setNeutral(neutral + 1)} text={'neutral'} />
       <Button handleClick = {() => setBad(bad + 1)} text={'bad'} />
       <Header title='statistics' />
-      <Statistics textGood='good' valueGood={good}
+      <Statistics all={all} textGood='good' valueGood={good}
                   textNeutral='netural' valueNeutral={neutral}
                   textBad='bad' valueBad={bad}
                   textAll='all' valueAll={all}

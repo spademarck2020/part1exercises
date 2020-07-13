@@ -5,7 +5,7 @@ const Header = (props) => <h1>{props.title}</h1>
 
 const Button = ({handleClick, text}) => <button onClick={handleClick}>{text}</button>
 
-const Content = ({text, value}) => <p>{text} {value}</p>
+const Statistic = ({text, value}) => <p>{text} {value}</p>
 
 const Statistics = (props) => {
 
@@ -17,12 +17,12 @@ const Statistics = (props) => {
 
   return(
   <>
-  <Content text={props.textGood} value={props.valueGood} />
-  <Content text={props.textNeutral} value={props.valueNeutral} />
-  <Content text={props.textBad} value={props.valueBad} />
-  <Content text={props.textAll} value={props.valueAll} />
-  <Content text={props.textAverage} value={props.valueAverage} />
-  <Content text={props.textPositive} value={props.valuePositive} />
+  <Statistic text='good' value={props.good} />
+  <Statistic text='neutral' value={props.neutral} />
+  <Statistic text='bad' value={props.bad} />
+  <Statistic text='all' value={props.all} />
+  <Statistic text='average' value={props.average} />
+  <Statistic text='positive' value={props.positive} />
   </>
   )
 }
@@ -44,12 +44,8 @@ const App = () =>{
       <Button handleClick = {() => setNeutral(neutral + 1)} text={'neutral'} />
       <Button handleClick = {() => setBad(bad + 1)} text={'bad'} />
       <Header title='statistics' />
-      <Statistics all={all} textGood='good' valueGood={good}
-                  textNeutral='netural' valueNeutral={neutral}
-                  textBad='bad' valueBad={bad}
-                  textAll='all' valueAll={all}
-                  textAverage='average' valueAverage={average}
-                  textPositive='positive' valuePositive={positive} />
+      <Statistics good={good} neutral={neutral} bad={bad}
+                  all={all} average={average} positive={positive} /> 
     </div>
   )
 }
